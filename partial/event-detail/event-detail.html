@@ -1,0 +1,29 @@
+<ion-view title="{{events[0].title}}" ng-controller="EventDetailCtrl">
+
+	<ion-nav-buttons side="left">
+		<a class="button icon-left ion-chevron-left button-clear button-dark" href="#/app/events">Back</a>
+	</ion-nav-buttons>
+
+<!--   <ion-nav-buttons side="right">
+    <button menu-toggle="left" class="button button-icon icon ion-gear-a"></button>
+  </ion-nav-buttons> -->
+
+    <ion-content class="has-header" style="padding:5px">
+
+    	<h4>{{events[0].title}}</h4>
+    	<p style="color:#666">{{events[0].longDescription ? events[0].longDescription : events[0].shortDescription}}</p>
+    	<a ng-if="events[0].website" href="http://{{events[0].website}}" target="_blank">{{events[0].website}}</a>
+
+		 <div class="card" ng-repeat="event in events" style="margin:10px 0px">
+		  <div class="item item-divider">
+		    {{event.startDateTime}} - {{event.endDateTime.substring(event.endDateTime.indexOf(' '))}}
+		    <br><a href="http://gencon.com/events/{{event.gameId.substring(5)}}" target="_blank" style="font-size:14px">Event on Gencon.com</a>
+		  </div>
+		  <label class="item item-input" ng-repeat="attr in detailKeysWhitelist" ng-show="event[attr.key]" style="white-space:normal;font-size:14px">
+	    	<span class="input-label">{{attr.value}}</span>{{event[attr.key]}}
+		  </label>
+		</div>
+
+    </ion-content>
+
+</ion-view>
