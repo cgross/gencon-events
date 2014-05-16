@@ -17,9 +17,9 @@ angular.module('genconEvents').factory('events',function($http) {
 		if (!eventsPromise){
 			eventsPromise = $http.get('events.json').then(function(response){
 				return _.chain(response.data.events)
-		            .filter(searchTextPredicate.bind(undefined,filter))
-		            .filter(timePredicate.bind(undefined,filter))
-		            .value();
+					.filter(searchTextPredicate.bind(undefined,filter))
+					.filter(timePredicate.bind(undefined,filter))
+					.value();
 			});
 		}
 		return eventsPromise;

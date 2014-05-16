@@ -7,4 +7,8 @@ angular.module('genconEvents').controller('EventListCtrl',function($scope,$state
 		$scope.eventsGroup = group;
 	});
 
+	$scope.encode = function(val){
+		return encodeURIComponent(val);
+	};
+
 });

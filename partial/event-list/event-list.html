@@ -10,7 +10,7 @@
 
         <ion-item ng-repeat="(title,events) in eventsGroup"
                   item="title"
-                  href="#/app/event?title={{title}}&groupKey={{groupKey}}&groupValue={{groupValue}}" ng-click="eventSelected(events)">
+                  href="#/app/event?title={{encode(title)}}&groupKey={{groupKey}}&groupValue={{groupValue}}" ng-click="eventSelected(events)">
           <h2>{{title}}</h2>
           <p style="white-space:normal"><span ng-repeat="event in events">{{event.shortStart}} </span></p>
       	  <p style="white-space:normal">{{events[0].shortDescription}}</p>
