@@ -3,6 +3,7 @@ angular.module('genconEvents').factory('events',function($http) {
 	var eventsService = {};
 
 	var eventsPromise;
+	var filterPromise;
 
 	var filter = {text:'',times:{all:true}};
 
@@ -16,13 +17,18 @@ angular.module('genconEvents').factory('events',function($http) {
 	eventsService.getEvents = function(){
 		if (!eventsPromise){
 			eventsPromise = $http.get('events.json').then(function(response){
-				return _.chain(response.data.events)
+				return response.data.events;
+			});
+		}
+		if (!filterPromise){
+			filterPromise = eventsPromise.then(function(events){
+				return _.chain(events)
 					.filter(searchTextPredicate.bind(undefined,filter))
 					.filter(timePredicate.bind(undefined,filter))
 					.value();
 			});
 		}
-		return eventsPromise;
+		return filterPromise;
 	};
 
 	eventsService.getEventsGroupedBy = function(groupKey){
@@ -56,7 +62,7 @@ angular.module('genconEvents').factory('events',function($http) {
 
 	eventsService.applyFilter = function(newFilter){
 		filter = newFilter;
-		eventsPromise = null;
+		filterPromise = null;
 		groupedByPromise = null;
 		groupedByKey = null;
 		groupKeyValuePromise = null;
