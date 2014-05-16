@@ -22,6 +22,11 @@ csv()
 	var m = moment(newItem.startDateTime,"MM/DD/YYYY hh:mm A");
 	newItem.shortStart = m.format('ddh:m:a').replace(':0:','');
 
+	newItem.eventType = newItem.eventType.substring(6);
+    if (newItem.eventType.indexOf('Non-Collectible') !== -1){
+	    newItem.eventType = 'Non-Collectible Card Game';
+	}
+
 	data.events.push(newItem);
 })
 .on('end',function(){

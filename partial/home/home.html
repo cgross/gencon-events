@@ -10,8 +10,8 @@
 
         <ion-item ng-repeat="(group,events) in groups"
                   item="group"
-                  href="#/app/events" ng-click="groupSelected(group,events)">
-          {{getGroupTitle(group)}}<span class="item-note">{{events.length | number}}</span>
+                  href="#/app/events?groupKey={{groupKey}}&groupValue={{group}}" ng-click="groupSelected(group,events)">
+          {{group}}<span class="item-note">{{events.length | number}}</span>
 
         </ion-item>
 
